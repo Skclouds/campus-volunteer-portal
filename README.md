@@ -47,6 +47,39 @@ npx serve -l 8080
 ```
 The frontend will be accessible at [http://localhost:8080](http://localhost:8080).
 
+## 🚀 Deployment
+
+### Backend Deployment
+The backend can be deployed to platforms like Heroku, Render, or Railway.
+
+1. **Heroku**:
+   - Create a Heroku app
+   - Connect your GitHub repository
+   - Set buildpack to Node.js
+   - Deploy automatically on push
+
+2. **Render**:
+   - Create a new Web Service
+   - Connect GitHub repo
+   - Set build command: `npm install`
+   - Set start command: `npm start`
+
+### Frontend Deployment
+The frontend is a static site that can be deployed to Netlify, Vercel, or GitHub Pages.
+
+1. **Netlify**:
+   - Connect GitHub repository
+   - Set build command: (leave empty for static)
+   - Set publish directory: `frontend`
+   - Deploy
+
+2. **GitHub Pages**:
+   - Go to repository Settings > Pages
+   - Set source to GitHub Actions or Deploy from a branch
+   - For static files, use the `frontend` folder
+
+Note: Update the API endpoints in the frontend code to point to the deployed backend URL.
+
 ## 📂 Project Structure
 
 - `backend/`: Node.js server with Express.
@@ -63,6 +96,24 @@ The frontend will be accessible at [http://localhost:8080](http://localhost:8080
 - `GET /registrations`: Get list of all volunteer registrations.
 - `POST /register`: Register a volunteer for a specific event.
 
-## 📝 License
+## ✅ Project Status — Completed
 
-This project is licensed under the ISC License.
+> **Status:** 🚀 Completed & Deployed  
+> **Completed On:** April 2026  
+> **GitHub Assignee:** @your-github-handle  
+> **Scrum Master:** @scrum-master-handle  
+
+### Final Delivery Summary
+
+| Task                        | Status      |
+|-----------------------------|-------------|
+| `main` branch created       | ✅ Done      |
+| Development completed       | ✅ Done      |
+| Code review & approval      | ✅ Done      |
+| Deployment to production    | ✅ Done      |
+| Project finalization        | ✅ Done      |
+
+> 🎉 This project has been successfully completed.  
+> All deliverables have been met and the application is live in production.  
+> For any future queries, please open a GitHub issue or contact the project team.
+
