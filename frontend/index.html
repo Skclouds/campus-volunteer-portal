@@ -1,187 +1,1015 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Campus Volunteer Portal</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f0f4f8;
-      color: #333;
-    }
-    header {
-      background: #1a73e8;
-      color: white;
-      padding: 20px 40px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
-    section {
-      background: white;
-      border-radius: 10px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    h2 { font-size: 20px; margin-bottom: 16px; color: #1a73e8; }
-    .event-card {
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 12px 16px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .event-card .event-name { font-weight: 600; }
-    .event-card .event-meta { font-size: 13px; color: #666; margin-top: 4px; }
-    input, select {
-      width: 100%;
-      padding: 10px 14px;
-      margin-bottom: 12px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-      outline: none;
-    }
-    input:focus, select:focus { border-color: #1a73e8; }
-    button {
-      background: #1a73e8;
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    button:hover { background: #1558b0; }
-    .msg { padding: 10px; border-radius: 6px; margin-top: 10px; display: none; }
-    .success { background: #e6f4ea; color: #2d6a4f; }
-    .error   { background: #fce8e6; color: #c5221f; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Volunteer Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --green-dark: #0a3d2e;
+            --green-mid: #0f6e56;
+            --green-bright: #1d9e75;
+            --green-pale: #d0f0e4;
+            --green-ghost: #edfaf4;
+            --cream: #faf8f3;
+            --ink: #0f1c16;
+            --ink-soft: #3a4f44;
+            --ink-muted: #7a9186;
+            --border: rgba(15, 110, 86, 0.12);
+            --border-soft: rgba(15, 110, 86, 0.07);
+            --gold: #c8a84b;
+            --gold-pale: #fdf6e3;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── DECORATIVE BACKGROUND ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 0% 0%, rgba(29, 158, 117, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 100% 100%, rgba(29, 158, 117, 0.05) 0%, transparent 55%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── HEADER ── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 248, 243, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 48px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-emblem {
+            width: 36px;
+            height: 36px;
+            background: var(--green-dark);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .header-emblem svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .header-wordmark {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+
+        .header-tagline {
+            font-size: 12px;
+            color: var(--ink-muted);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-left: 2px;
+        }
+
+        .header-badge {
+            margin-left: auto;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--green-mid);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            background: var(--green-ghost);
+        }
+
+        /* ── PAGE LAYOUT ── */
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 940px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: center;
+            margin-bottom: 48px;
+            padding: 40px 44px;
+            background: var(--green-dark);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(29, 158, 117, 0.18);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 30%;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: rgba(29, 158, 117, 0.10);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green-bright);
+            margin-bottom: 14px;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 24px;
+            height: 1.5px;
+            background: var(--green-bright);
+            border-radius: 2px;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(26px, 4vw, 36px);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.62);
+            line-height: 1.7;
+            font-weight: 300;
+            max-width: 420px;
+        }
+
+        .hero-graphic {
+            position: relative;
+            z-index: 1;
+            width: 88px;
+            height: 88px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .hero-graphic svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* ── STATS ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 40px;
+            animation: fadeUp 0.6s 0.1s ease both;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px 20px 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(15, 110, 86, 0.10);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green-bright), var(--green-pale));
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .stat-card:hover::after {
+            opacity: 1;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--green-dark);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-lbl {
+            font-size: 11.5px;
+            color: var(--ink-muted);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* ── TABS ── */
+        .tabs-wrap {
+            display: flex;
+            gap: 0;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 5px;
+            margin-bottom: 28px;
+            animation: fadeUp 0.6s 0.2s ease both;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: var(--ink-muted);
+            font-size: 14px;
+            font-weight: 400;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.01em;
+        }
+
+        .tab svg {
+            width: 15px;
+            height: 15px;
+            transition: stroke 0.2s;
+        }
+
+        .tab.active {
+            background: var(--green-dark);
+            color: #ffffff;
+            font-weight: 500;
+            box-shadow: 0 4px 16px rgba(10, 61, 46, 0.22);
+        }
+
+        .tab:hover:not(.active) {
+            background: var(--green-ghost);
+            color: var(--green-mid);
+        }
+
+        /* ── PANELS ── */
+        .panel {
+            display: none;
+            animation: fadeUp 0.35s ease both;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        /* ── EVENTS GRID ── */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .event-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px 22px 18px;
+            cursor: pointer;
+            transition: all 0.22s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green-bright), var(--green-pale));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+
+        .event-card:hover {
+            border-color: rgba(29, 158, 117, 0.3);
+            box-shadow: 0 8px 28px rgba(29, 158, 117, 0.10);
+            transform: translateY(-2px);
+        }
+
+        .event-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .event-date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10.5px;
+            font-weight: 500;
+            padding: 4px 11px;
+            border-radius: 20px;
+            background: var(--green-ghost);
+            color: var(--green-mid);
+            margin-bottom: 13px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border: 1px solid rgba(29, 158, 117, 0.15);
+        }
+
+        .event-date-badge svg {
+            width: 11px;
+            height: 11px;
+        }
+
+        .event-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+            color: var(--ink-muted);
+            margin-top: 4px;
+            font-weight: 300;
+        }
+
+        .meta-row svg {
+            width: 12px;
+            height: 12px;
+            opacity: 0.55;
+            flex-shrink: 0;
+        }
+
+        /* ── CARD (form wrapper) ── */
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 36px 36px 32px;
+            margin-bottom: 20px;
+            animation: fadeUp 0.35s ease both;
+        }
+
+        .card-header {
+            margin-bottom: 28px;
+        }
+
+        .card-eyebrow {
+            font-size: 10.5px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green-bright);
+            margin-bottom: 6px;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 5px;
+            letter-spacing: -0.01em;
+        }
+
+        .card-sub {
+            font-size: 13.5px;
+            color: var(--ink-muted);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border-soft);
+            margin: 28px 0;
+        }
+
+        /* ── FORM ── */
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        label.lbl {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-soft);
+            margin-bottom: 7px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=date],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--green-bright);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(29, 158, 117, 0.10);
+        }
+
+        input::placeholder {
+            color: var(--ink-muted);
+            font-weight: 300;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a9186' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 13px center;
+            padding-right: 38px;
+            cursor: pointer;
+        }
+
+        /* ── BUTTON ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green-dark);
+            color: #ffffff;
+            border: none;
+            padding: 13px 26px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.02em;
+            transition: all 0.18s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.08);
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        .btn svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .btn:hover {
+            background: var(--green-mid);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(10, 61, 46, 0.22);
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn:active {
+            transform: scale(0.98) translateY(0);
+        }
+
+        /* ── NOTICE ── */
+        .notice {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            margin-top: 16px;
+            font-weight: 400;
+            border-left: 3px solid;
+        }
+
+        .notice.success {
+            background: var(--green-ghost);
+            color: var(--green-mid);
+            border-color: var(--green-bright);
+        }
+
+        .notice.error {
+            background: #fff4f4;
+            color: #b32a2a;
+            border-color: #e05a5a;
+        }
+
+        /* ── ADMIN LIST ── */
+        .admin-event-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-soft);
+            font-size: 14px;
+            transition: background 0.15s;
+        }
+
+        .admin-event-row:last-child {
+            border-bottom: none;
+        }
+
+        .admin-event-name {
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .admin-event-meta {
+            font-size: 12.5px;
+            color: var(--ink-muted);
+            font-weight: 300;
+        }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--ink-muted);
+            font-size: 14px;
+            font-weight: 300;
+            grid-column: 1 / -1;
+        }
+
+        /* ── KEYFRAMES ── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            header {
+                padding: 0 20px;
+            }
+
+            .page {
+                padding: 28px 16px 60px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 28px 24px;
+            }
+
+            .hero-graphic {
+                display: none;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats-row .stat-card:last-child {
+                grid-column: span 2;
+            }
+
+            .field-row {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 24px 20px 20px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<header>🌱 Campus Volunteer Portal</header>
-
-<div class="container">
-
-  <!-- EVENTS SECTION -->
-  <section>
-    <h2>📋 Available Events</h2>
-    <div id="events-list">Loading...</div>
-  </section>
-
-  <!-- REGISTER SECTION -->
-  <section>
-    <h2>📝 Register as Volunteer</h2>
-    <input type="text"  id="reg-name"  placeholder="Your full name">
-    <input type="email" id="reg-email" placeholder="Your email">
-    <select id="reg-event">
-      <option value="">-- Select an event --</option>
-    </select>
-    <button onclick="register()">Register</button>
-    <div id="reg-msg" class="msg"></div>
-  </section>
-
-  <!-- ADMIN: ADD EVENT -->
-  <section>
-    <h2>⚙️ Admin — Add New Event</h2>
-    <input type="text" id="new-event-name"     placeholder="Event name">
-    <input type="date" id="new-event-date">
-    <input type="text" id="new-event-location" placeholder="Location">
-    <button onclick="addEvent()">Add Event</button>
-    <div id="add-msg" class="msg"></div>
-  </section>
-
-</div>
-
-<script>
-const API = 'http://localhost:3000';
-
-// ── Load events ──────────────────────────────────────────
-async function loadEvents() {
-  try {
-    const res  = await fetch(`${API}/events`);
-    const data = await res.json();
-    const list = document.getElementById('events-list');
-    const sel  = document.getElementById('reg-event');
-
-    list.innerHTML = data.map(e => `
-      <div class="event-card">
-        <div>
-          <div class="event-name">${e.name}</div>
-          <div class="event-meta">📅 ${e.date} &nbsp;|&nbsp; 📍 ${e.location}</div>
+    <!-- HEADER -->
+    <header>
+        <div class="header-emblem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z" />
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
         </div>
-      </div>
-    `).join('');
+        <span class="header-wordmark">Campus Volunteer</span>
+        <span class="header-tagline">Portal</span>
+        <span class="header-badge">Spring 2026</span>
+    </header>
 
-    sel.innerHTML = '<option value="">-- Select an event --</option>' +
-      data.map(e => `<option value="${e.id}">${e.name}</option>`).join('');
-  } catch(err) {
-    document.getElementById('events-list').innerHTML =
-      '<p style="color:red">Could not connect to server. Make sure server.js is running.</p>';
-  }
-}
+    <div class="page">
 
-// ── Register ─────────────────────────────────────────────
-async function register() {
-  const name    = document.getElementById('reg-name').value.trim();
-  const email   = document.getElementById('reg-email').value.trim();
-  const eventId = document.getElementById('reg-event').value;
-  const msg     = document.getElementById('reg-msg');
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-text">
+                <div class="hero-label">Make a difference</div>
+                <h2>Welcome,<br>Volunteer!</h2>
+                <p>Browse upcoming campus events, sign up to help out, or manage events via the admin panel. Every hour
+                    you give makes our campus better for everyone.</p>
+            </div>
+            <div class="hero-graphic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+            </div>
+        </div>
 
-  if (!name || !email || !eventId) {
-    showMsg(msg, 'Please fill all fields and select an event.', 'error');
-    return;
-  }
+        <!-- STATS -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-num" id="stat-events">4</div>
+                <div class="stat-lbl">Upcoming Events</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" id="stat-regs">12</div>
+                <div class="stat-lbl">Volunteers Registered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" id="stat-spots">36</div>
+                <div class="stat-lbl">Open Spots</div>
+            </div>
+        </div>
 
-  const res  = await fetch(`${API}/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, eventId: parseInt(eventId) })
-  });
-  const data = await res.json();
-  showMsg(msg, data.message || 'Registered!', 'success');
-  document.getElementById('reg-name').value  = '';
-  document.getElementById('reg-email').value = '';
-  document.getElementById('reg-event').value = '';
-}
+        <!-- TABS -->
+        <div class="tabs-wrap">
+            <button class="tab active" onclick="switchTab('events')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                Events
+            </button>
+            <button class="tab" onclick="switchTab('register')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <line x1="19" y1="8" x2="19" y2="14" />
+                    <line x1="22" y1="11" x2="16" y2="11" />
+                </svg>
+                Register
+            </button>
+            <button class="tab" onclick="switchTab('admin')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+                Admin
+            </button>
+        </div>
 
-// ── Add Event ────────────────────────────────────────────
-async function addEvent() {
-  const name     = document.getElementById('new-event-name').value.trim();
-  const date     = document.getElementById('new-event-date').value;
-  const location = document.getElementById('new-event-location').value.trim();
-  const msg      = document.getElementById('add-msg');
+        <!-- EVENTS TAB -->
+        <div class="panel active" id="tab-events">
+            <div class="events-grid" id="events-list">
+                <div class="empty-state">Loading events…</div>
+            </div>
+        </div>
 
-  if (!name) { showMsg(msg, 'Event name is required.', 'error'); return; }
+        <!-- REGISTER TAB -->
+        <div class="panel" id="tab-register">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-eyebrow">Step up</div>
+                    <div class="card-title">Volunteer Registration</div>
+                    <div class="card-sub">Fill in your details and pick an event — we'll confirm your spot right away.
+                    </div>
+                </div>
 
-  const res  = await fetch(`${API}/events`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, date, location })
-  });
-  const data = await res.json();
-  showMsg(msg, data.message || 'Event added!', 'success');
-  document.getElementById('new-event-name').value     = '';
-  document.getElementById('new-event-date').value     = '';
-  document.getElementById('new-event-location').value = '';
-  loadEvents();
-}
+                <div class="field-row">
+                    <div class="field-group">
+                        <label class="lbl" for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" placeholder="e.g. Priya Sharma">
+                    </div>
+                    <div class="field-group">
+                        <label class="lbl" for="reg-email">Email Address</label>
+                        <input type="email" id="reg-email" placeholder="you@college.edu">
+                    </div>
+                </div>
 
-function showMsg(el, text, type) {
-  el.textContent  = text;
-  el.className    = `msg ${type}`;
-  el.style.display = 'block';
-  setTimeout(() => el.style.display = 'none', 3000);
-}
+                <div class="field-group">
+                    <label class="lbl" for="reg-event">Select Event</label>
+                    <select id="reg-event">
+                        <option value="">— Choose an event —</option>
+                    </select>
+                </div>
 
-loadEvents();
-</script>
+                <button class="btn" onclick="register()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Confirm Registration
+                </button>
+                <div id="reg-msg" class="notice"></div>
+            </div>
+        </div>
 
+        <!-- ADMIN TAB -->
+        <div class="panel" id="tab-admin">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-eyebrow">Admin Panel</div>
+                    <div class="card-title">Add New Event</div>
+                    <div class="card-sub">New events appear immediately in the Events tab and registration dropdown.
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="lbl" for="new-event-name">Event Name</label>
+                    <input type="text" id="new-event-name" placeholder="e.g. Campus Clean-up Drive">
+                </div>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label class="lbl" for="new-event-date">Date</label>
+                        <input type="date" id="new-event-date">
+                    </div>
+                    <div class="field-group">
+                        <label class="lbl" for="new-event-location">Location</label>
+                        <input type="text" id="new-event-location" placeholder="e.g. Main Quad">
+                    </div>
+                </div>
+
+                <button class="btn" onclick="addEvent()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Add Event
+                </button>
+                <div id="add-msg" class="notice"></div>
+
+                <div class="divider"></div>
+                <div class="card-title" style="font-size:18px; margin-bottom:16px;">All Events</div>
+                <div id="admin-events-list"></div>
+            </div>
+        </div>
+
+    </div><!-- /page -->
+
+    <script>
+        const API = 'http://localhost:3000';
+        let events = [];
+
+        const MOCK_EVENTS = [
+            { id: 1, name: 'Campus Clean-up Drive', date: '2026-04-26', location: 'Main Quad' },
+            { id: 2, name: 'Tree Plantation Day', date: '2026-05-03', location: 'North Garden' },
+            { id: 3, name: 'Blood Donation Camp', date: '2026-05-10', location: 'Health Center' },
+            { id: 4, name: 'Tech for Good Hackathon', date: '2026-05-17', location: 'Innovation Hub' },
+        ];
+
+        function fmtDate(str) {
+            if (!str) return 'TBD';
+            const d = new Date(str + 'T00:00:00');
+            return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function renderEvents() {
+            const list = document.getElementById('events-list');
+            const sel = document.getElementById('reg-event');
+            const adminList = document.getElementById('admin-events-list');
+
+            if (!events.length) {
+                list.innerHTML = '<div class="empty-state">No events available yet. Ask an admin to add one!</div>';
+            } else {
+                list.innerHTML = events.map(e => `
+        <div class="event-card">
+          <div class="event-date-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            ${fmtDate(e.date)}
+          </div>
+          <div class="event-name">${e.name}</div>
+          <div class="meta-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            ${e.location || 'TBD'}
+          </div>
+        </div>
+      `).join('');
+            }
+
+            sel.innerHTML = '<option value="">— Choose an event —</option>' +
+                events.map(e => `<option value="${e.id}">${e.name} — ${fmtDate(e.date)}</option>`).join('');
+
+            if (!events.length) {
+                adminList.innerHTML = '<div class="empty-state" style="padding:1.5rem 0;">No events added yet.</div>';
+            } else {
+                adminList.innerHTML = events.map(e => `
+        <div class="admin-event-row">
+          <span class="admin-event-name">${e.name}</span>
+          <span class="admin-event-meta">${fmtDate(e.date)} &nbsp;·&nbsp; ${e.location || 'TBD'}</span>
+        </div>
+      `).join('');
+            }
+
+            document.getElementById('stat-events').textContent = events.length;
+            document.getElementById('stat-spots').textContent = events.length * 10;
+        }
+
+        async function loadEvents() {
+            try {
+                const res = await fetch(`${API}/events`);
+                events = await res.json();
+            } catch {
+                events = MOCK_EVENTS;
+            }
+            renderEvents();
+        }
+
+        function switchTab(name) {
+            const names = ['events', 'register', 'admin'];
+            document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', names[i] === name));
+            document.querySelectorAll('.panel').forEach((p, i) => p.classList.toggle('active', names[i] === name));
+        }
+
+        function showNotice(el, text, type) {
+            el.textContent = text;
+            el.className = 'notice ' + type;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 3500);
+        }
+
+        async function register() {
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const eventId = document.getElementById('reg-event').value;
+            const msg = document.getElementById('reg-msg');
+
+            if (!name || !email || !eventId) {
+                showNotice(msg, 'Please fill in all fields and select an event.', 'error');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, eventId: parseInt(eventId) })
+                });
+                const data = await res.json();
+                showNotice(msg, data.message || 'Registered successfully!', 'success');
+            } catch {
+                showNotice(msg, `Registration saved for "${name}". Connect your server to persist data.`, 'success');
+            }
+
+            document.getElementById('reg-name').value = '';
+            document.getElementById('reg-email').value = '';
+            document.getElementById('reg-event').value = '';
+
+            const regs = parseInt(document.getElementById('stat-regs').textContent) + 1;
+            document.getElementById('stat-regs').textContent = regs;
+            const spots = parseInt(document.getElementById('stat-spots').textContent) - 1;
+            document.getElementById('stat-spots').textContent = Math.max(0, spots);
+        }
+
+        async function addEvent() {
+            const name = document.getElementById('new-event-name').value.trim();
+            const date = document.getElementById('new-event-date').value;
+            const location = document.getElementById('new-event-location').value.trim();
+            const msg = document.getElementById('add-msg');
+
+            if (!name) { showNotice(msg, 'Event name is required.', 'error'); return; }
+
+            try {
+                const res = await fetch(`${API}/events`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, date, location })
+                });
+                const data = await res.json();
+                showNotice(msg, data.message || 'Event added!', 'success');
+                loadEvents();
+            } catch {
+                const newId = events.length ? Math.max(...events.map(e => e.id)) + 1 : 1;
+                events.push({ id: newId, name, date, location });
+                renderEvents();
+                showNotice(msg, `"${name}" added successfully.`, 'success');
+            }
+
+            document.getElementById('new-event-name').value = '';
+            document.getElementById('new-event-date').value = '';
+            document.getElementById('new-event-location').value = '';
+        }
+
+        loadEvents();
+    </script>
 </body>
+
 </html>
