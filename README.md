@@ -100,8 +100,7 @@ Note: Update the API endpoints in the frontend code to point to the deployed bac
 
 > **Status:** 🚀 Completed & Deployed  
 > **Completed On:** April 2026  
-> **GitHub Assignee:** @therohanmane
-> **Scrum Master:** @Rohan Mane
+
 
 ### Final Delivery Summary
 
