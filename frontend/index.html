@@ -7,12 +7,10 @@
     <title>Campus Volunteer Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
     <style>
-        :root {
+         :root {
             --green-dark: #0a3d2e;
             --green-mid: #0f6e56;
             --green-bright: #1d9e75;
@@ -27,7 +25,7 @@
             --gold: #c8a84b;
             --gold-pale: #fdf6e3;
         }
-
+        
         *,
         *::before,
         *::after {
@@ -35,7 +33,7 @@
             margin: 0;
             padding: 0;
         }
-
+        
         body {
             font-family: 'DM Sans', sans-serif;
             background: var(--cream);
@@ -43,20 +41,18 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
         /* ── DECORATIVE BACKGROUND ── */
+        
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 0% 0%, rgba(29, 158, 117, 0.07) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 100% 100%, rgba(29, 158, 117, 0.05) 0%, transparent 55%);
+            background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(29, 158, 117, 0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(29, 158, 117, 0.05) 0%, transparent 55%);
             pointer-events: none;
             z-index: 0;
         }
-
         /* ── HEADER ── */
+        
         header {
             position: sticky;
             top: 0;
@@ -71,7 +67,7 @@
             align-items: center;
             gap: 14px;
         }
-
+        
         .header-emblem {
             width: 36px;
             height: 36px;
@@ -82,12 +78,12 @@
             justify-content: center;
             flex-shrink: 0;
         }
-
+        
         .header-emblem svg {
             width: 18px;
             height: 18px;
         }
-
+        
         .header-wordmark {
             font-family: 'Playfair Display', serif;
             font-size: 17px;
@@ -95,7 +91,7 @@
             color: var(--ink);
             letter-spacing: -0.01em;
         }
-
+        
         .header-tagline {
             font-size: 12px;
             color: var(--ink-muted);
@@ -104,7 +100,7 @@
             text-transform: uppercase;
             margin-left: 2px;
         }
-
+        
         .header-badge {
             margin-left: auto;
             padding: 5px 14px;
@@ -116,8 +112,8 @@
             letter-spacing: 0.04em;
             background: var(--green-ghost);
         }
-
         /* ── PAGE LAYOUT ── */
+        
         .page {
             position: relative;
             z-index: 1;
@@ -125,8 +121,8 @@
             margin: 0 auto;
             padding: 48px 24px 80px;
         }
-
         /* ── HERO ── */
+        
         .hero {
             display: grid;
             grid-template-columns: 1fr auto;
@@ -140,7 +136,7 @@
             overflow: hidden;
             animation: fadeUp 0.6s ease both;
         }
-
+        
         .hero::before {
             content: '';
             position: absolute;
@@ -151,7 +147,7 @@
             border-radius: 50%;
             background: rgba(29, 158, 117, 0.18);
         }
-
+        
         .hero::after {
             content: '';
             position: absolute;
@@ -162,12 +158,12 @@
             border-radius: 50%;
             background: rgba(29, 158, 117, 0.10);
         }
-
+        
         .hero-text {
             position: relative;
             z-index: 1;
         }
-
+        
         .hero-label {
             display: inline-flex;
             align-items: center;
@@ -179,7 +175,7 @@
             color: var(--green-bright);
             margin-bottom: 14px;
         }
-
+        
         .hero-label::before {
             content: '';
             width: 24px;
@@ -187,7 +183,7 @@
             background: var(--green-bright);
             border-radius: 2px;
         }
-
+        
         .hero h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(26px, 4vw, 36px);
@@ -197,7 +193,7 @@
             margin-bottom: 14px;
             letter-spacing: -0.02em;
         }
-
+        
         .hero p {
             font-size: 15px;
             color: rgba(255, 255, 255, 0.62);
@@ -205,7 +201,7 @@
             font-weight: 300;
             max-width: 420px;
         }
-
+        
         .hero-graphic {
             position: relative;
             z-index: 1;
@@ -219,13 +215,13 @@
             justify-content: center;
             flex-shrink: 0;
         }
-
+        
         .hero-graphic svg {
             width: 40px;
             height: 40px;
         }
-
         /* ── STATS ── */
+        
         .stats-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -233,23 +229,25 @@
             margin-bottom: 40px;
             animation: fadeUp 0.6s 0.1s ease both;
         }
-
+        
         .stat-card {
             background: #ffffff;
             border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 24px 20px 20px;
+            border-radius: 20px;
+            padding: 24px;
             text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
-
+        
         .stat-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            border-color: var(--green-mid);
             box-shadow: 0 12px 32px rgba(15, 110, 86, 0.10);
         }
-
+        
         .stat-card::after {
             content: '';
             position: absolute;
@@ -261,11 +259,11 @@
             opacity: 0;
             transition: opacity 0.2s;
         }
-
+        
         .stat-card:hover::after {
             opacity: 1;
         }
-
+        
         .stat-num {
             font-family: 'Playfair Display', serif;
             font-size: 38px;
@@ -274,7 +272,7 @@
             line-height: 1;
             margin-bottom: 6px;
         }
-
+        
         .stat-lbl {
             font-size: 11.5px;
             color: var(--ink-muted);
@@ -282,8 +280,8 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-
         /* ── TABS ── */
+        
         .tabs-wrap {
             display: flex;
             gap: 0;
@@ -294,7 +292,7 @@
             margin-bottom: 28px;
             animation: fadeUp 0.6s 0.2s ease both;
         }
-
+        
         .tab {
             flex: 1;
             padding: 10px 16px;
@@ -313,42 +311,91 @@
             gap: 8px;
             letter-spacing: 0.01em;
         }
-
+        
         .tab svg {
             width: 15px;
             height: 15px;
             transition: stroke 0.2s;
         }
-
+        
         .tab.active {
             background: var(--green-dark);
             color: #ffffff;
             font-weight: 500;
             box-shadow: 0 4px 16px rgba(10, 61, 46, 0.22);
         }
-
+        
         .tab:hover:not(.active) {
             background: var(--green-ghost);
             color: var(--green-mid);
         }
-
+        /* ── VOLUNTEER LIST ── */
+        
+        .volunteer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .volunteer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        
+        .volunteer-row:hover {
+            border-color: var(--green-mid);
+            box-shadow: 0 4px 12px rgba(15, 110, 86, 0.05);
+        }
+        
+        .volunteer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .volunteer-name {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 15px;
+        }
+        
+        .volunteer-email {
+            font-size: 13px;
+            color: var(--ink-muted);
+        }
+        
+        .volunteer-event {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: var(--green-ghost);
+            color: var(--green-dark);
+            border-radius: 20px;
+            font-weight: 500;
+        }
         /* ── PANELS ── */
+        
         .panel {
             display: none;
             animation: fadeUp 0.35s ease both;
         }
-
+        
         .panel.active {
             display: block;
         }
-
         /* ── EVENTS GRID ── */
+        
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 16px;
         }
-
+        
         .event-card {
             background: #ffffff;
             border: 1px solid var(--border);
@@ -359,7 +406,7 @@
             position: relative;
             overflow: hidden;
         }
-
+        
         .event-card::before {
             content: '';
             position: absolute;
@@ -372,17 +419,17 @@
             transform-origin: left;
             transition: transform 0.25s ease;
         }
-
+        
         .event-card:hover {
             border-color: rgba(29, 158, 117, 0.3);
             box-shadow: 0 8px 28px rgba(29, 158, 117, 0.10);
             transform: translateY(-2px);
         }
-
+        
         .event-card:hover::before {
             transform: scaleX(1);
         }
-
+        
         .event-date-badge {
             display: inline-flex;
             align-items: center;
@@ -398,12 +445,12 @@
             text-transform: uppercase;
             border: 1px solid rgba(29, 158, 117, 0.15);
         }
-
+        
         .event-date-badge svg {
             width: 11px;
             height: 11px;
         }
-
+        
         .event-name {
             font-family: 'Playfair Display', serif;
             font-size: 17px;
@@ -412,7 +459,7 @@
             margin-bottom: 12px;
             line-height: 1.3;
         }
-
+        
         .meta-row {
             display: flex;
             align-items: center;
@@ -422,15 +469,15 @@
             margin-top: 4px;
             font-weight: 300;
         }
-
+        
         .meta-row svg {
             width: 12px;
             height: 12px;
             opacity: 0.55;
             flex-shrink: 0;
         }
-
         /* ── CARD (form wrapper) ── */
+        
         .card {
             background: #ffffff;
             border: 1px solid var(--border);
@@ -439,11 +486,11 @@
             margin-bottom: 20px;
             animation: fadeUp 0.35s ease both;
         }
-
+        
         .card-header {
             margin-bottom: 28px;
         }
-
+        
         .card-eyebrow {
             font-size: 10.5px;
             font-weight: 500;
@@ -452,7 +499,7 @@
             color: var(--green-bright);
             margin-bottom: 6px;
         }
-
+        
         .card-title {
             font-family: 'Playfair Display', serif;
             font-size: 22px;
@@ -461,31 +508,32 @@
             margin-bottom: 5px;
             letter-spacing: -0.01em;
         }
-
+        
         .card-sub {
             font-size: 13.5px;
             color: var(--ink-muted);
             font-weight: 300;
             line-height: 1.6;
         }
-
+        
         .divider {
             height: 1px;
             background: var(--border-soft);
             margin: 28px 0;
         }
-
         /* ── FORM ── */
+        
         .field-group {
             margin-bottom: 20px;
         }
-
+        
         .field-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 16px;
+            margin-bottom: 20px;
         }
-
+        
         label.lbl {
             display: block;
             font-size: 12px;
@@ -495,7 +543,7 @@
             letter-spacing: 0.04em;
             text-transform: uppercase;
         }
-
+        
         input[type=text],
         input[type=email],
         input[type=date],
@@ -512,19 +560,19 @@
             outline: none;
             transition: all 0.2s;
         }
-
+        
         input:focus,
         select:focus {
             border-color: var(--green-bright);
             background: #ffffff;
             box-shadow: 0 0 0 4px rgba(29, 158, 117, 0.10);
         }
-
+        
         input::placeholder {
             color: var(--ink-muted);
             font-weight: 300;
         }
-
+        
         select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a9186' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
@@ -533,8 +581,8 @@
             padding-right: 38px;
             cursor: pointer;
         }
-
         /* ── BUTTON ── */
+        
         .btn {
             display: inline-flex;
             align-items: center;
@@ -553,7 +601,7 @@
             position: relative;
             overflow: hidden;
         }
-
+        
         .btn::after {
             content: '';
             position: absolute;
@@ -562,27 +610,27 @@
             opacity: 0;
             transition: opacity 0.15s;
         }
-
+        
         .btn svg {
             width: 15px;
             height: 15px;
         }
-
+        
         .btn:hover {
             background: var(--green-mid);
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(10, 61, 46, 0.22);
         }
-
+        
         .btn:hover::after {
             opacity: 1;
         }
-
+        
         .btn:active {
             transform: scale(0.98) translateY(0);
         }
-
         /* ── NOTICE ── */
+        
         .notice {
             display: none;
             padding: 12px 16px;
@@ -592,20 +640,20 @@
             font-weight: 400;
             border-left: 3px solid;
         }
-
+        
         .notice.success {
             background: var(--green-ghost);
             color: var(--green-mid);
             border-color: var(--green-bright);
         }
-
+        
         .notice.error {
             background: #fff4f4;
             color: #b32a2a;
             border-color: #e05a5a;
         }
-
         /* ── ADMIN LIST ── */
+        
         .admin-event-row {
             display: flex;
             justify-content: space-between;
@@ -615,23 +663,23 @@
             font-size: 14px;
             transition: background 0.15s;
         }
-
+        
         .admin-event-row:last-child {
             border-bottom: none;
         }
-
+        
         .admin-event-name {
             font-weight: 500;
             color: var(--ink);
         }
-
+        
         .admin-event-meta {
             font-size: 12.5px;
             color: var(--ink-muted);
             font-weight: 300;
         }
-
         /* ── EMPTY STATE ── */
+        
         .empty-state {
             text-align: center;
             padding: 48px 20px;
@@ -640,51 +688,43 @@
             font-weight: 300;
             grid-column: 1 / -1;
         }
-
         /* ── KEYFRAMES ── */
+        
         @keyframes fadeUp {
             from {
                 opacity: 0;
                 transform: translateY(18px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         /* ── RESPONSIVE ── */
+        
         @media (max-width: 640px) {
             header {
                 padding: 0 20px;
             }
-
             .page {
                 padding: 28px 16px 60px;
             }
-
             .hero {
                 grid-template-columns: 1fr;
                 padding: 28px 24px;
             }
-
             .hero-graphic {
                 display: none;
             }
-
             .stats-row {
                 grid-template-columns: 1fr 1fr;
             }
-
             .stats-row .stat-card:last-child {
                 grid-column: span 2;
             }
-
             .field-row {
                 grid-template-columns: 1fr;
             }
-
             .card {
                 padding: 24px 20px 20px;
             }
@@ -697,8 +737,7 @@
     <!-- HEADER -->
     <header>
         <div class="header-emblem">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z" />
                 <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
             </svg>
@@ -715,12 +754,10 @@
             <div class="hero-text">
                 <div class="hero-label">Make a difference</div>
                 <h2>Welcome,<br>Volunteer!</h2>
-                <p>Browse upcoming campus events, sign up to help out, or manage events via the admin panel. Every hour
-                    you give makes our campus better for everyone.</p>
+                <p>Browse upcoming campus events, sign up to help out, or manage events via the admin panel. Every hour you give makes our campus better for everyone.</p>
             </div>
             <div class="hero-graphic">
-                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path
                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
@@ -729,15 +766,15 @@
 
         <!-- STATS -->
         <div class="stats-row">
-            <div class="stat-card">
+            <div class="stat-card" onclick="switchTab('events')">
                 <div class="stat-num" id="stat-events">4</div>
                 <div class="stat-lbl">Upcoming Events</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" onclick="switchTab('volunteers')">
                 <div class="stat-num" id="stat-regs">12</div>
                 <div class="stat-lbl">Volunteers Registered</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" onclick="switchTab('events')">
                 <div class="stat-num" id="stat-spots">36</div>
                 <div class="stat-lbl">Open Spots</div>
             </div>
@@ -765,6 +802,16 @@
                 </svg>
                 Register
             </button>
+            <button class="tab" onclick="switchTab('volunteers')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                Volunteers
+            </button>
             <button class="tab" onclick="switchTab('admin')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
@@ -783,20 +830,20 @@
             </div>
         </div>
 
-        <!-- REGISTER TAB -->
+        <!-- REGISTRATION TAB -->
         <div class="panel" id="tab-register">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-eyebrow">Step up</div>
-                    <div class="card-title">Volunteer Registration</div>
-                    <div class="card-sub">Fill in your details and pick an event — we'll confirm your spot right away.
+                    <div class="card-eyebrow">Join Us</div>
+                    <div class="card-title">Event Registration</div>
+                    <div class="card-sub">Select an event and provide your details to join our volunteer community.
                     </div>
                 </div>
 
                 <div class="field-row">
                     <div class="field-group">
                         <label class="lbl" for="reg-name">Full Name</label>
-                        <input type="text" id="reg-name" placeholder="e.g. Priya Sharma">
+                        <input type="text" id="reg-name" placeholder="e.g. Jane Doe">
                     </div>
                     <div class="field-group">
                         <label class="lbl" for="reg-email">Email Address</label>
@@ -819,6 +866,18 @@
                     Confirm Registration
                 </button>
                 <div id="reg-msg" class="notice"></div>
+            </div>
+        </div>
+
+        <!-- VOLUNTEERS TAB -->
+        <div class="panel" id="tab-volunteers">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-eyebrow">Community</div>
+                    <div class="card-title">Registered Volunteers</div>
+                    <div class="card-sub">All students currently signed up for upcoming volunteer events.</div>
+                </div>
+                <div id="volunteers-list" class="volunteer-list"></div>
             </div>
         </div>
 
@@ -845,6 +904,10 @@
                         <label class="lbl" for="new-event-location">Location</label>
                         <input type="text" id="new-event-location" placeholder="e.g. Main Quad">
                     </div>
+                    <div class="field-group">
+                        <label class="lbl" for="new-event-capacity">Capacity</label>
+                        <input type="number" id="new-event-capacity" value="10" min="1">
+                    </div>
                 </div>
 
                 <button class="btn" onclick="addEvent()">
@@ -863,23 +926,44 @@
             </div>
         </div>
 
-    </div><!-- /page -->
+    </div>
+    <!-- /page -->
 
     <script>
         const API = 'http://localhost:3000';
         let events = [];
+        let registrations = [];
 
-        const MOCK_EVENTS = [
-            { id: 1, name: 'Campus Clean-up Drive', date: '2026-04-26', location: 'Main Quad' },
-            { id: 2, name: 'Tree Plantation Day', date: '2026-05-03', location: 'North Garden' },
-            { id: 3, name: 'Blood Donation Camp', date: '2026-05-10', location: 'Health Center' },
-            { id: 4, name: 'Tech for Good Hackathon', date: '2026-05-17', location: 'Innovation Hub' },
-        ];
+        const MOCK_EVENTS = [{
+            id: 1,
+            name: 'Campus Clean-up Drive',
+            date: '2026-04-26',
+            location: 'Main Quad'
+        }, {
+            id: 2,
+            name: 'Tree Plantation Day',
+            date: '2026-05-03',
+            location: 'North Garden'
+        }, {
+            id: 3,
+            name: 'Blood Donation Camp',
+            date: '2026-05-10',
+            location: 'Health Center'
+        }, {
+            id: 4,
+            name: 'Tech for Good Hackathon',
+            date: '2026-05-17',
+            location: 'Innovation Hub'
+        }, ];
 
         function fmtDate(str) {
             if (!str) return 'TBD';
             const d = new Date(str + 'T00:00:00');
-            return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+            return d.toLocaleDateString('en-IN', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
         }
 
         function renderEvents() {
@@ -890,37 +974,71 @@
             if (!events.length) {
                 list.innerHTML = '<div class="empty-state">No events available yet. Ask an admin to add one!</div>';
             } else {
-                list.innerHTML = events.map(e => `
-        <div class="event-card">
-          <div class="event-date-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            ${fmtDate(e.date)}
-          </div>
-          <div class="event-name">${e.name}</div>
-          <div class="meta-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            ${e.location || 'TBD'}
-          </div>
-        </div>
-      `).join('');
+                list.innerHTML = events.map(e => {
+                    const eventRegs = registrations.filter(r => r.eventId === e.id).length;
+                    const spotsLeft = Math.max(0, (e.capacity || 10) - eventRegs);
+                    return `
+                        <div class="event-card">
+                          <div class="event-date-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            ${fmtDate(e.date)}
+                          </div>
+                          <div class="event-name">${e.name}</div>
+                          <div class="meta-row">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                            ${e.location || 'TBD'}
+                          </div>
+                          <div class="meta-row" style="margin-top: 8px; font-weight: 500; color: ${spotsLeft > 0 ? 'var(--green-mid)' : '#d9534f'}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            ${spotsLeft} spots remaining
+                          </div>
+                        </div>
+                    `;
+                }).join('');
             }
 
             sel.innerHTML = '<option value="">— Choose an event —</option>' +
-                events.map(e => `<option value="${e.id}">${e.name} — ${fmtDate(e.date)}</option>`).join('');
+                events.map(e => {
+                    const eventRegs = registrations.filter(r => r.eventId === e.id).length;
+                    const spotsLeft = Math.max(0, (e.capacity || 10) - eventRegs);
+                    return `<option value="${e.id}" ${spotsLeft === 0 ? 'disabled' : ''}>${e.name} — ${fmtDate(e.date)} (${spotsLeft} left)</option>`;
+                }).join('');
 
             if (!events.length) {
                 adminList.innerHTML = '<div class="empty-state" style="padding:1.5rem 0;">No events added yet.</div>';
             } else {
                 adminList.innerHTML = events.map(e => `
-        <div class="admin-event-row">
-          <span class="admin-event-name">${e.name}</span>
-          <span class="admin-event-meta">${fmtDate(e.date)} &nbsp;·&nbsp; ${e.location || 'TBD'}</span>
-        </div>
-      `).join('');
+                    <div class="admin-event-row">
+                      <span class="admin-event-name">${e.name}</span>
+                      <span class="admin-event-meta">${fmtDate(e.date)} &nbsp;·&nbsp; ${e.location || 'TBD'} &nbsp;·&nbsp; Cap: ${e.capacity || 10}</span>
+                    </div>
+                  `).join('');
             }
 
+            const totalCapacity = events.reduce((sum, e) => sum + (e.capacity || 10), 0);
             document.getElementById('stat-events').textContent = events.length;
-            document.getElementById('stat-spots').textContent = events.length * 10;
+            document.getElementById('stat-spots').textContent = totalCapacity - registrations.length;
+        }
+
+        function renderRegistrations() {
+            const list = document.getElementById('volunteers-list');
+            if (!registrations.length) {
+                list.innerHTML = '<div class="empty-state">No volunteers registered yet. Be the first!</div>';
+            } else {
+                list.innerHTML = registrations.map(r => {
+                    const event = events.find(e => e.id === r.eventId);
+                    return `
+                        <div class="volunteer-row">
+                            <div class="volunteer-info">
+                                <span class="volunteer-name">${r.name}</span>
+                                <span class="volunteer-email">${r.email}</span>
+                            </div>
+                            <span class="volunteer-event">${event ? event.name : 'Unknown Event'}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+            document.getElementById('stat-regs').textContent = registrations.length;
         }
 
         async function loadEvents() {
@@ -933,10 +1051,22 @@
             renderEvents();
         }
 
+        async function loadRegistrations() {
+            try {
+                const res = await fetch(`${API}/registrations`);
+                registrations = await res.json();
+            } catch {
+                registrations = [];
+            }
+            renderRegistrations();
+        }
+
         function switchTab(name) {
-            const names = ['events', 'register', 'admin'];
+            const names = ['events', 'register', 'volunteers', 'admin'];
             document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', names[i] === name));
             document.querySelectorAll('.panel').forEach((p, i) => p.classList.toggle('active', names[i] === name));
+            if (name === 'volunteers') loadRegistrations();
+            if (name === 'events') loadEvents();
         }
 
         function showNotice(el, text, type) {
@@ -960,11 +1090,18 @@
             try {
                 const res = await fetch(`${API}/register`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, eventId: parseInt(eventId) })
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        eventId: parseInt(eventId)
+                    })
                 });
                 const data = await res.json();
                 showNotice(msg, data.message || 'Registered successfully!', 'success');
+                loadRegistrations(); // Refresh registrations list and count
             } catch {
                 showNotice(msg, `Registration saved for "${name}". Connect your server to persist data.`, 'success');
             }
@@ -972,33 +1109,45 @@
             document.getElementById('reg-name').value = '';
             document.getElementById('reg-email').value = '';
             document.getElementById('reg-event').value = '';
-
-            const regs = parseInt(document.getElementById('stat-regs').textContent) + 1;
-            document.getElementById('stat-regs').textContent = regs;
-            const spots = parseInt(document.getElementById('stat-spots').textContent) - 1;
-            document.getElementById('stat-spots').textContent = Math.max(0, spots);
         }
 
         async function addEvent() {
             const name = document.getElementById('new-event-name').value.trim();
             const date = document.getElementById('new-event-date').value;
             const location = document.getElementById('new-event-location').value.trim();
+            const capacity = document.getElementById('new-event-capacity').value;
             const msg = document.getElementById('add-msg');
 
-            if (!name) { showNotice(msg, 'Event name is required.', 'error'); return; }
+            if (!name) {
+                showNotice(msg, 'Event name is required.', 'error');
+                return;
+            }
 
             try {
                 const res = await fetch(`${API}/events`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, date, location })
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        date,
+                        location,
+                        capacity
+                    })
                 });
                 const data = await res.json();
                 showNotice(msg, data.message || 'Event added!', 'success');
                 loadEvents();
             } catch {
                 const newId = events.length ? Math.max(...events.map(e => e.id)) + 1 : 1;
-                events.push({ id: newId, name, date, location });
+                events.push({
+                    id: newId,
+                    name,
+                    date,
+                    location,
+                    capacity: parseInt(capacity) || 10
+                });
                 renderEvents();
                 showNotice(msg, `"${name}" added successfully.`, 'success');
             }
@@ -1006,9 +1155,11 @@
             document.getElementById('new-event-name').value = '';
             document.getElementById('new-event-date').value = '';
             document.getElementById('new-event-location').value = '';
+            document.getElementById('new-event-capacity').value = '10';
         }
 
         loadEvents();
+        loadRegistrations();
     </script>
 </body>
 

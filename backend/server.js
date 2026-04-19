@@ -1,14 +1,16 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // Temporary in-memory storage
 let events = [
-    { id: 1, name: "Campus Clean-up Drive", date: "2026-04-26", location: "Main Quad" },
-    { id: 2, name: "Tree Plantation Day", date: "2026-05-03", location: "North Garden" },
-    { id: 3, name: "Blood Donation Camp", date: "2026-05-10", location: "Health Center" },
-    { id: 4, name: "Tech for Good Hackathon", date: "2026-05-17", location: "Innovation Hub" }
+    { id: 1, name: "Campus Clean-up Drive", date: "2026-04-26", location: "Main Quad", capacity: 15 },
+    { id: 2, name: "Tree Plantation Day", date: "2026-05-03", location: "North Garden", capacity: 20 },
+    { id: 3, name: "Blood Donation Camp", date: "2026-05-10", location: "Health Center", capacity: 50 },
+    { id: 4, name: "Tech for Good Hackathon", date: "2026-05-17", location: "Innovation Hub", capacity: 30 }
 ];
 
 let registrations = [];
@@ -24,7 +26,7 @@ app.get('/events', (req, res) => {
    ADD EVENT
 =========================== */
 app.post('/events', (req, res) => {
-    const { name, date, location } = req.body;
+    const { name, date, location, capacity } = req.body;
 
     if (!name) {
         return res.status(400).json({ error: "Event name is required" });
@@ -34,7 +36,8 @@ app.post('/events', (req, res) => {
         id: events.length ? Math.max(...events.map(e => e.id)) + 1 : 1,
         name,
         date,
-        location
+        location,
+        capacity: parseInt(capacity) || 10
     };
 
     events.push(newEvent);
@@ -48,6 +51,10 @@ app.post('/events', (req, res) => {
 /* ===========================
    REGISTER USER
 =========================== */
+app.get('/registrations', (req, res) => {
+    res.status(200).json(registrations);
+});
+
 app.post('/register', (req, res) => {
     const { name, email, eventId } = req.body;
 
